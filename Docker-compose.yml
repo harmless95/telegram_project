@@ -3,7 +3,7 @@ services:
     build:
       dockerfile: project_tg/Dockerfile
       context: .
-    container_name: tg_app
+    container_name: telegram_app
     environment:
       APP_CONFIG__DB__URL: "postgresql+asyncpg://${POSTGRES_USER:?Error: POSTGRES_USER not set}:${POSTGRES_PASSWORD:?Error: POSTGRES_PASSWORD not set}@pg:5432/${POSTGRES_DB:?Error: POSTGRES_DB not set}"
       APP_CONFIG__T_BOT__TOKEN: ${APP_CONFIG__T_BOT__TOKEN}
@@ -15,7 +15,7 @@ services:
 
   pg:
     image: postgres:latest
-    container_name: db_pg
+    container_name: tg_pg
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -28,7 +28,6 @@ services:
       timeout: 3s
       retries: 3
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgresql-data:/var/lib/postgresql
     networks:
       - backend_network
