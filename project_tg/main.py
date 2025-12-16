@@ -7,6 +7,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from core.config import setting
 
+
 async def main() -> None:
 
     bot = Bot(
