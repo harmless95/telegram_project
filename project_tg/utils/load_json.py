@@ -2,7 +2,7 @@ import asyncio
 import json
 from uuid import UUID
 from datetime import datetime
-from core.model import Video, VideoSnapshots, db_helper_conn
+from core.model import Video, VideoSnapshot, db_helper_conn
 
 
 async def load_json(path: str):
@@ -23,7 +23,7 @@ async def load_json(path: str):
             session.add(video)
 
             for s in v["snapshots"]:
-                snap = VideoSnapshots(
+                snap = VideoSnapshot(
                     id=UUID(s["id"]),
                     video_id=UUID(s["video_id"]),
                     views_count=s["views_count"],

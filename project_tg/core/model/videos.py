@@ -8,7 +8,7 @@ from core.model import BaseDB
 from core.model.mixins import IdPrKey
 
 if TYPE_CHECKING:
-    from .video_snapshots import VideoSnapshots
+    from .video_snapshots import VideoSnapshot
 
 
 class Video(BaseDB, IdPrKey):
@@ -20,7 +20,7 @@ class Video(BaseDB, IdPrKey):
     likes_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     comments_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     reports_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
-    snapshots: Mapped[list["VideoSnapshots"]] = relationship(
+    snapshots: Mapped[list["VideoSnapshot"]] = relationship(
         back_populates="video",
         cascade="all, delete-orphan",
     )

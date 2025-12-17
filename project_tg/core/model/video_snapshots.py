@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .videos import Video
 
 
-class VideoSnapshots(BaseDB, IdPrKey):
+class VideoSnapshot(BaseDB, IdPrKey):
     video_id: Mapped[UUID] = mapped_column(ForeignKey("videos.id"), nullable=False)
     views_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     likes_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
