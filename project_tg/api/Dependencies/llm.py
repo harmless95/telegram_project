@@ -11,7 +11,7 @@ SQL_PROMPT = """
 - comments_count BIGINT
 - reports_count BIGINT
 
-Таблица video_snapshots:
+Таблица video_snapshots: 
 - id BIGINT, PK
 - video_id BIGINT, FK -> videos.id
 - views_count BIGINT
