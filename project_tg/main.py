@@ -6,6 +6,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
 
 from core.config import setting
+from api.routers.handlers import router
 
 
 async def main() -> None:
@@ -15,6 +16,7 @@ async def main() -> None:
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
     )
     dp = Dispatcher(storage=MemoryStorage())
+    dp.include_router(router=router)
 
     await bot.delete_webhook(drop_pending_updates=True)
 
