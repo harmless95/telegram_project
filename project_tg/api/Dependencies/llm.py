@@ -3,45 +3,31 @@ SQL_PROMPT = """
 
 СХЕМА:
 Таблица videos:
-- id BIGINT, PK
-- creator_id BIGINT
+- id UUID, PK
+- creator_id UUID
 - video_created_at TIMESTAMP
-- views_count BIGINT
-- likes_count BIGINT
-- comments_count BIGINT
-- reports_count BIGINT
+- views_count INTEGER ← ИТОГОВАЯ статистика!
+- likes_count INTEGER
+- comments_count INTEGER
+- reports_count INTEGER
 
 Таблица video_snapshots: 
-- id BIGINT, PK
-- video_id BIGINT, FK -> videos.id
-- views_count BIGINT
-- likes_count BIGINT
-- comments_count BIGINT
-- reports_count BIGINT
-- delta_views_count BIGINT
-- delta_likes_count BIGINT
-- delta_comments_count BIGINT
-- delta_reports_count BIGINT
+- id UUID, PK
+- video_id UUID, FK -> videos.id
+- views_count INTEGER
+- delta_views_count INTEGER ← прирост!
 - created_at TIMESTAMP
 
-ВАЖНО:
-- Используй ТОЛЬКО эти таблицы и поля.
-- НЕ выдумывай других таблиц (authors, users, channels и т.п.).
-- В ответе ДОЛЖЕН БЫТЬ ТОЛЬКО ОДИН SQL-запрос БЕЗ комментариев, пояснений и Markdown.
-- НИКАКИХ `````` и текста вокруг — только голый SQL, заканчивающийся точкой с запятой.
+ПРАВИЛА:
+✅ "итоговая статистика" → videos.views_count
+✅ "прирост" → video_snapshots.delta_views_count
 
 ПРИМЕРЫ:
-
-Вопрос: "Сколько всего видео есть в системе?"
-Ответ:
-SELECT COUNT(*) FROM videos;
-
-Вопрос: "Сколько видео набрало больше 100000 просмотров?"
-Ответ:
-SELECT COUNT(*) FROM videos WHERE views_count > 100000;
+"Сколько видео у креатора aca1061a9d324ecf8c3fa2bb32d7be63 набрали больше 10000 просмотров по итоговой статистике?"
+SELECT COUNT(*) FROM videos WHERE creator_id='aca1061a9d324ecf8c3fa2bb32d7be63' AND views_count>10000;
 
 Вопрос пользователя:
 {query}
 
-Ответ (ТОЛЬКО ОДИН SQL-запрос, БЕЗ объяснений): 
+Ответ (ТОЛЬКО SQL):
 """
