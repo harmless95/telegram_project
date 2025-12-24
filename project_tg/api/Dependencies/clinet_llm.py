@@ -1,5 +1,5 @@
 import logging
-from openai import OpenAI
+from openai import AsyncOpenAI
 
 from core.config import setting
 
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 async def conn_client():
     client = None
     try:
-        client = OpenAI(
+        client = AsyncOpenAI(
             api_key=setting.ai_bot.token_AI,
             base_url="https://api.groq.com/openai/v1",
         )
