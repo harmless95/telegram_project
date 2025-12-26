@@ -7,10 +7,12 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from core.config import setting
 from api.routers.handlers import router
+from core.core_logging import loging_constructor
 
 
 async def main() -> None:
-
+    loop = asyncio.get_running_loop()
+    loop.set_task_factory(lambda loop, coro: loging_constructor(loop=loop, coro=coro))
     bot = Bot(
         token=setting.t_bot.token,
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
